@@ -50,7 +50,7 @@ You don't need anything extra to play
 
 ## :memo: License
 
-This project is under license from GNU. For more details, see the [LICENSE](LICENSE.md) file.
+This project is under license from GNU. For more details, see the [LICENSE](LICENSE) file.
 
 Made with :heart: by <a href="https://github.com/arturomsoberanes" target="_blank">arturomsoberanes</a>
 
