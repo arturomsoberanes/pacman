@@ -5,9 +5,28 @@ var gameArea = document.getElementById("GameArea");
 var bounds = 0;
 var focus = 0;
 var direction = 0;
+var startInterval = 0;
+var keycap = document.querySelector('body');
 
+//Use u
+keycap.onkeydown = keyboard;
 
-//Function for move to right
+function keyboard(e){
+  if(e.code === "ArrowRight"){
+    run(1)
+  }
+  if(e.code === "ArrowLeft"){
+    run(2)
+  }
+  if(e.code === "ArrowUp"){
+    run(3)
+  }
+  if(e.code === "ArrowDown"){
+    run(4)
+  }
+}
+
+//Function for move
 function run(arrow) {
 
   if(arrow !== undefined){
@@ -17,10 +36,12 @@ function run(arrow) {
   let imgWidth = img.width
   let imgHeight = img.height
   focus = (focus + 1) % 2;
-  bounds = checkPageBounds(bounds, imgWidth, imgHeight);
   img.src = pacArray[focus];
-  let timeout = setTimeout(run, 500);
-
+  var timeout;
+  if(startInterval === 0){
+    timeout = setInterval(run, 200);
+    startInterval = 1;
+  }
   if(direction === 1){
     posX += 10;
     img.style.left = posX + "px";
@@ -41,12 +62,24 @@ function run(arrow) {
     img.style.top = posY + "px";
     img.style.transform="rotate(90deg)";
   }
-  if (bounds === 1) {
-    posX = posX;
-    posY = posY;
-    img.style.left = posX + "px";
-    img.style.top = posY + "px";
-    clearTimeout(timeout);
+  bounds = checkPageBounds(bounds, imgWidth, imgHeight);
+  if (direction !== 0 && bounds === 1 || bounds === 2) {
+    if(bounds===1){
+      if(posX < 0){
+        posX += 10;
+      }else{
+        posX -= 10;
+      }
+      img.style.left = posX + "px";
+    }else if(bounds === 2){
+      if(posY < 0){
+        posY += 10;
+      }else{
+        posY -= 10;
+      }
+      img.style.top = posY + "px";
+    }
+    direction = 0;
     bounds = 0;
   }
 
@@ -55,16 +88,16 @@ function run(arrow) {
 
 function checkPageBounds(bounds, imgWidth, imgHeight) {
   let widthGameArea = gameArea.clientWidth;
-  let widthArea = widthGameArea - imgWidth -10;
-  let heightgamearea = gameArea.clientHeight;
-  let heightArea = widthGameArea - imgHeight -10;
+  let widthArea = widthGameArea - imgWidth;
+  let heightGameArea = gameArea.clientHeight;
+  let heightArea = heightGameArea - imgHeight;
 
-  if(posX >= widthArea || posX < 0){
+  if(posX > widthArea || posX < 0){
     bounds = 1;
   }
 
-  if(posY >= widthArea || posY < 0){
-    bounds = 1;
+  if(posY > heightArea || posY < 0){
+    bounds = 2;
   }
   console.log(posX+" "+posY);
   console.log(widthArea);

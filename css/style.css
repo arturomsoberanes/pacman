@@ -13,7 +13,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items:center;
-  background-color: #333333;
+  background: url(../images/background.webp);
 }
 #PacMan {
   width: 70px;
@@ -22,26 +22,28 @@ body {
   left:0;
 }
 .container {
-  width: 100%;
   max-width:500px;
   background: #18202d;
   border:4px solid #7575ff;
   padding:10px;
 }
 .container, .game-area {
-  height: 500px;
+  height: 100%;
+  width: 100%;
   position:relative;
 }
 .controls {
   margin: 1em;
   width: 30%;
+  min-width: 200px;
   max-width:300px;
   text-align:center;
-  background-color: #ffffff;
+  background-color: #ffe116;
   border-radius: 50%;
+  border:3px solid #d80043;
 }
 .controls img {
-  width: 33.3%;
+  width: 23.3%;
   cursor:pointer;
 }
 .controls .controls-middle img:first-child {
